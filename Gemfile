@@ -35,6 +35,10 @@ gem 'jbuilder', '~> 2.5'
 #Devise handle authentication for system
 gem 'devise'
 
+gem 'slim'
+
+gem 'html2slim'
+
 
 
 # Reduces boot times through caching; required in config/boot.rb
