@@ -12,4 +12,29 @@
  *
  *= require_tree .
  *= require_self
+ *= require_bootstrap
  */
+ @import "bootstrap";
+
+
+ .login{
+  margin: auto;
+  margin-top: 10%;
+  max-width: 30%;
+  background: whitesmoke;
+}
+
+.login-wrap
+{
+  padding: 20px;
+}
+
+.login-heading
+{
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  padding: 20px 15px;
+  background: rgb(65, 202, 192);
+  border-radius: 5px 5px 0px 0px;
+}
