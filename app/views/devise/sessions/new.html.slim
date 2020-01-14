@@ -1,0 +1,12 @@
+.container
+  .login
+    h5.login-heading Login Now
+    .login-wrap
+      = form_for(resource, url: session_path(resource_name)) do |f|
+        .form-group
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-sm'
+        .form-group
+          = f.password_field :password, autocomplete: "current-password", class: 'form-control form-control-sm'
+        .form-group
+          = f.submit "Log in", class: 'btn btn-danger btn-block '
+        = render "devise/shared/links"
