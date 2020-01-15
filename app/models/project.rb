@@ -11,11 +11,11 @@ class Project < ApplicationRecord
   end
 
   def in_progress_todos_count
-    todos.where(status: 'new').count
+    todos.where(status: 'in_progress').count
   end
 
   def done_todos_count
-    todos.where(status: 'new').count
+    todos.where(status: 'done').count
   end
 
   def developers_count

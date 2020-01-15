@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var projects = JSON.parse('<%= @report_data.to_json.html_safe -%>');
+        Object.keys(projects).forEach(function(key) {
+            value = projects[key];
+            var data = [['ToDos', 'Count']].concat(value);
+            data = google.visualization.arrayToDataTable(data);
+            var options = {
+              title: key
+            };
+            var chart = new google.visualization.PieChart(document.getElementById(key));
+            chart.draw(data, options);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+        <% @report_data.each_with_index do |data, index| %>
+          <% if index%2 == 0 %>
+            <tr>
+              <td><div id=<%=data[0]%> style="width: 600px; height: 500px;"></div></td>
+          <% else %>
+            <td><div id=<%=data[0]%> style="width: 600px; height: 500px;"></div></td>              
+          <% end %>          
+        <% end %>
+      </tr>
+    </table>
+  </body>
+</html>
