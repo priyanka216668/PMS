@@ -9,7 +9,7 @@
       = f.simple_fields_for :resources do |r|
         .row
           .col-md-8
-           = r.select :user_id, options_for_select(User.all.collect { |v| [v.name.humanize.titleize, v.id.to_s]}), {}, id: "developers", class: "form-control input-sm"
+           = r.select :user_id, options_for_select(User.where(role: 'developer').collect { |v| [v.name.humanize.titleize, v.id.to_s]}), {}, id: "developers", class: "form-control input-sm"
           .col-md-4
             = r.link_to_remove "X" , class: 'btn pull-right'
       = f.link_to_add "Add Devlopers", :resources, style: "margin-left: 10px;"

@@ -17,7 +17,7 @@
         = f.select :status, options_for_select(TODO_STATUS), {}, id: "status", class: "form-control input-sm"
       .col-md-6
         label Assigned To
-        = f.select :assigned_to_id, options_for_select(User.all.collect { |v| [v.name.humanize.titleize, v.id.to_s]}), {}, id: "assigned_to_id", class: "form-control input-sm"
+        = f.select :assigned_to_id, options_for_select(User.where(role: 'developer').collect { |v| [v.name.humanize.titleize, v.id.to_s]}), {}, id: "assigned_to_id", class: "form-control input-sm"
     br
     .row
       .col-md-2
