@@ -1,0 +1,15 @@
+.modal-header
+  button.close data-dismiss="modal" type="button"
+    span aria-hidden="true" X
+    span.sr-only Close
+  h4 Add Project Details
+= simple_form_for @project,  url: projects_path , html:{class: 'form', multipart: true, id: 'create_project_form'}, remote: true, method: :post, authenticity_token: true, data: { type: :json } ,defaults: {input_html: {class: 'form-control input-sm'}}do |f|
+  .modal-body
+    .row
+      .col-md-1
+        = f.submit :save, class: 'btn btn-success', id: 'new-pa-insurance'
+      .col-md-1
+        = f.submit :cancel, class: 'btn btn-dark', "data-dismiss"=> "modal"
+
+
+

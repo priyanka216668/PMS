@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_14_172032) do
+ActiveRecord::Schema.define(version: 2020_01_15_135838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,24 +20,18 @@ ActiveRecord::Schema.define(version: 2020_01_14_172032) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "description"
+    t.bigint "created_by_id"
+    t.index ["created_by_id"], name: "index_projects_on_created_by_id"
   end
 
-  create_table "team_members", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "team_id"
-    t.index ["team_id"], name: "index_team_members_on_team_id"
-    t.index ["user_id"], name: "index_team_members_on_user_id"
-  end
-
-  create_table "teams", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
+  create_table "resources", force: :cascade do |t|
+    t.boolean "is_active_user"
     t.bigint "project_id"
-    t.index ["project_id"], name: "index_teams_on_project_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_resources_on_project_id"
+    t.index ["user_id"], name: "index_resources_on_user_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -47,8 +41,12 @@ ActiveRecord::Schema.define(version: 2020_01_14_172032) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "team_member_id"
-    t.index ["team_member_id"], name: "index_todos_on_team_member_id"
+    t.bigint "assigned_to_id"
+    t.bigint "created_by_id"
+    t.bigint "project_id"
+    t.index ["assigned_to_id"], name: "index_todos_on_assigned_to_id"
+    t.index ["created_by_id"], name: "index_todos_on_created_by_id"
+    t.index ["project_id"], name: "index_todos_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,8 +64,8 @@ ActiveRecord::Schema.define(version: 2020_01_14_172032) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "team_members", "teams"
-  add_foreign_key "team_members", "users"
-  add_foreign_key "teams", "projects"
-  add_foreign_key "todos", "team_members"
+  add_foreign_key "projects", "users", column: "created_by_id"
+  add_foreign_key "todos", "projects"
+  add_foreign_key "todos", "users", column: "assigned_to_id"
+  add_foreign_key "todos", "users", column: "created_by_id"
 end
