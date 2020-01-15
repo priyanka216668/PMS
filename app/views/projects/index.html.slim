@@ -1,8 +1,38 @@
 section.panel
   header.panel-heading style="height:50px;"
-    p.business-name.pull-left PROJECTS
-    button type="button" class="btn btn-sm btn-primary" id="create_project" style="margin-left: 2%" onclick= "create_project()" Create
-
+    .row
+      .col-md-2
+        p.business-name.pull-left PROJECTS
+      .col-md-4
+        button type="button" class="btn btn-sm btn-primary" id="create_project" style="margin-left: 2%; margin-bottom: 2%" onclick= "create_project()" Create
+    br
+    table.table
+      thead
+        tr
+          th scope="col"  Sr No.
+          th scope="col"  Project Name
+          th scope="col"  No Of Developers
+          th scope="col"  New Todos
+          th scope="col"  In Progress Todos
+          th scope="col"  Completed Todos
+          th
+      tbody
+        - @projects.each_with_index do |project, index|
+          tr
+            td
+              = index + 1
+            td
+              = project['name']
+            td
+              = project['developers_count']
+            td
+              = project['new_todos_count']
+            td
+              = project['in_progress_todos_count']
+            td
+              = project['done_todos_count']
+            td
+              = link_to('Todos', project_path(project['id']), method: :get, class: 'btn btn-success btn-sm')
 
 
 #project_modal.modal.fade aria-hidden="true" role="dialog"

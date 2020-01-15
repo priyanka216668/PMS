@@ -1,14 +1,22 @@
 .modal-header
-  button.close data-dismiss="modal" type="button"
-    span aria-hidden="true" X
-    span.sr-only Close
-  h4 Add Project Details
-= simple_form_for @project,  url: projects_path , html:{class: 'form', multipart: true, id: 'create_project_form'}, remote: true, method: :post, authenticity_token: true, data: { type: :json } ,defaults: {input_html: {class: 'form-control input-sm'}}do |f|
+= simple_nested_form_for @project,  url: projects_path , html:{class: 'form', multipart: true, id: 'create_project_form'}, remote: true, method: :post, authenticity_token: true, data: { type: :json } ,defaults: {input_html: {class: 'form-control input-sm'}}do |f|
   .modal-body
     .row
-      .col-md-1
-        = f.submit :save, class: 'btn btn-success', id: 'new-pa-insurance'
-      .col-md-1
+      = f.input :name, label: 'Project Name', class: 'form-control'
+    .row
+      = f.input :description, label: 'Project Description', class: 'form-control'
+    .row
+      = f.simple_fields_for :resources do |r|
+        .row
+          .col-md-8
+           = r.select :user_id, options_for_select(User.all.collect { |v| [v.name.humanize.titleize, v.id.to_s]}), {}, id: "developers", class: "form-control input-sm"
+          .col-md-4
+            = r.link_to_remove "X" , class: 'btn pull-right'
+      = f.link_to_add "Add Devlopers", :resources, style: "margin-left: 10px;"
+    .row
+      .col-md-3
+        = f.submit :save, class: 'btn btn-success'
+      .col-md-3
         = f.submit :cancel, class: 'btn btn-dark', "data-dismiss"=> "modal"
 
 

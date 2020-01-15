@@ -1,7 +1,10 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :load_resource, except: [:index, :new, :create]
 
   def index
     if current_user.present?
+      @projects = Project.where(created_by_id: current_user.id).all.as_json
     else
       redirect_to new_user_session_path
     end
@@ -15,18 +18,21 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    # health_insurance = HealthInsurance.new(health_params)
-    # pos_user = health_insurance.user
-    # if pos_user.present? && pos_user.relationship_manager.present? && health_insurance.save!
-    #   save_member_other_attribitues(health_insurance)
-    #   return render json: {message: 'Record Created Successfully'}, status: :ok
-    # end
-    # render json: { message: 'Unable to create record'}, status: :ok
+    project = Project.new(project_params)
+    project.created_by_id = current_user.id
+    project.save
+  end
+
+  def show
+
   end
 
 
   private
+  def load_resource
+    @project = Project.find(params[:id])
+  end
   def project_params
-    params.require(:project).permit(:name, :description, :created_by_id, reources_attributes:[Resource.attribute_names])
+    params.require(:project).permit(:name, :description, :created_by_id, resources_attributes:[Resource.attribute_names])
   end
 end

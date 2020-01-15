@@ -1,0 +1,12 @@
+section.panel
+  header.panel-heading style="height:50px;"
+    .row
+      .col-md-2
+        p.pull-left
+          = "Project #{@project.name}"
+      .col-md-4
+        button type="button" class="btn btn-sm btn-primary" id="create_todo" style="margin-left: 2%; margin-bottom: 2%" onclick= "create_todo(#{@project.id})" Create Todo
+    br
+
+#todo_modal.modal.fade aria-hidden="true" role="dialog"
+  .modal-content
