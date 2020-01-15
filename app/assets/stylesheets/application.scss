@@ -15,10 +15,11 @@
  *= require_bootstrap
  */
  @import "bootstrap";
+ @import "select2";
+ @import "select2-bootstrap";
 
 
  .login{
-  margin: auto;
   margin-top: 10%;
   max-width: 30%;
   background: whitesmoke;
@@ -39,10 +40,18 @@
   border-radius: 5px 5px 0px 0px;
 }
 
-.modal-dialog{
+#project_modal{
   margin-top: 10%;
-  width: 60%;
+  margin-left: 30%;
+  width: 30%;
 }
 .modal-body{
-  min-height: 60vh;
+  min-height: 30vh;
+  padding: 5%;
+}
+
+#todo_modal{
+  margin-top: 10%;
+  margin-left: 30%;
+  width: 40%;
 }

@@ -17,4 +17,6 @@
 //= require popper
 //= require bootstrap
 //= require projects
+//= require select2
+//= require jquery_nested_form
 //= require_tree .
