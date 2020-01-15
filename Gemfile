@@ -42,6 +42,8 @@ gem 'html2slim'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'nested_form'
+gem "select2-rails" 
 
 
 
