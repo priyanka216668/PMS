@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-manager = User.create!(email: "tanya@gmail.com", name: "Tanya Saroha", role: "admin", password: "tanya")
+manager = User.create!(email: "tanya@gmail.com", name: "Tanya Saroha", role: "admin", password: "tanya123")
 dev1 = User.create!(email: "smita@gmail.com", name: "Smita Yadav", role: "developer", password: "smita123")
 dev2 = User.create!(email: "ayesha@gmail.com", name: "Ayesha Rao", role: "developer", password: "ayesha123")
 dev3 = User.create!(email: "jaya@gmail.com", name: "Jaya Singh", role: "developer", password: "jaya123")
