@@ -24,7 +24,21 @@ class ProjectsController < ApplicationController
   end
 
   def show
-
+    if current_user.present?
+      @result = []
+      project_developers = @project.resources.collect(&:user)
+      project_developers.each do |dev|
+        todos = dev.assigned_todos.where(project_id: @project.id).order(status: :asc)#.group_by(&:status)
+        tasks = {}
+        tasks["new"] = todos.where(status: "new").collect(&:title)
+        tasks["in_progress"] = todos.where(status: "in_progress").collect(&:title)
+        tasks["done"] = todos.where(status: "done").collect(&:title)
+        #todos.each{ |k,v| tasks << {k => v.collect(&:title)} }
+        @result << {name: dev.name, tasks: tasks}
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def reports

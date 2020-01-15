@@ -8,5 +8,42 @@ section.panel
         button type="button" class="btn btn-sm btn-primary" id="create_todo" style="margin-left: 2%; margin-bottom: 2%" onclick= "create_todo(#{@project.id})" Create Todo
     br
 
+  .row
+    .col-md-2
+      strong
+        | Developer Name
+    .col-md-2
+      strong
+        | New
+    .col-md-2
+      strong
+        | In Progress
+    .col-md-2
+      strong
+        | Done
+  - @result.each_with_index do |todo, index|
+    .row
+        | _ _   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+    .row
+      .col-md-2
+        = todo[:name]
+      .col-md-2
+        - if todo[:tasks]["new"].present?
+          - todo[:tasks]["new"].each do |x|
+            .row
+              = x
+      .col-md-2
+        -if todo[:tasks]["in_progress"].present?
+          - todo[:tasks]["in_progress"].each do |x|
+            .row
+              = x
+      .col-md-2
+        -if todo[:tasks]["done"].present?
+          -todo[:tasks]["done"].each do |x|
+            .row
+              = x
+  | _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+  
+
 #todo_modal.modal.fade aria-hidden="true" role="dialog"
   .modal-content
