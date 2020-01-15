@@ -25,3 +25,7 @@ window.create_todo =(project_id)->
     # $('#developers').select2
     #   placeholder: 'Select Developers'
     #   allowClear: true
+
+window.edit_project_todo =(project_id, todo_id)->
+ $('#todo_modal').modal('show')
+ $.get("/projects/"+project_id+ "/todos/"+ todo_id+"/edit")

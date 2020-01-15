@@ -3,6 +3,7 @@ section.panel
     .row
       .col-md-2
         p.business-name.pull-left PROJECTS
+    - if is_admin?
       .col-md-4
         button type="button" class="btn btn-sm btn-primary" id="create_project" style="margin-left: 2%; margin-bottom: 2%" onclick= "create_project()" Create
     br
@@ -11,7 +12,8 @@ section.panel
         tr
           th scope="col"  Sr No.
           th scope="col"  Project Name
-          th scope="col"  No Of Developers
+          - if is_admin?
+            th scope="col"  No Of Developers
           th scope="col"  New Todos
           th scope="col"  In Progress Todos
           th scope="col"  Completed Todos
@@ -23,8 +25,9 @@ section.panel
               = index + 1
             td
               = project['name']
-            td
-              = project['developers_count']
+            - if is_admin?
+              td
+                = project['developers_count']
             td
               = project['new_todos_count']
             td
@@ -32,8 +35,14 @@ section.panel
             td
               = project['done_todos_count']
             td
-              = link_to('Todos', project_path(project['id']), method: :get, class: 'btn btn-success btn-sm')
+              - if is_admin?
+                = link_to('Todos', project_path(project['id']), method: :get, class: 'btn btn-success btn-sm')
+              - else
+                = link_to('Todos', project_todos_path(project['id']), method: :get, class: 'btn btn-success btn-sm')
+
+
 
 
 #project_modal.modal.fade aria-hidden="true" role="dialog"
   .modal-content.create-call
+

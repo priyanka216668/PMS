@@ -4,7 +4,8 @@ class ProjectsController < ApplicationController
 
   def index
     if current_user.present?
-      @projects = Project.where(created_by_id: current_user.id).all.as_json
+      @projects = current_user.role == 'admin' ? Project.where(created_by_id: current_user.id).all.as_json :
+        current_user.resources.collect(&:user_resources)
     else
       redirect_to new_user_session_path
     end

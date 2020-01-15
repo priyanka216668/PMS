@@ -1,0 +1,21 @@
+.modal-header
+  legend Todo
+= simple_form_for @todo,  url: project_todo_path() , html:{class: 'form', multipart: true, id: 'edit_todo_form'}, remote: true, method: :patch, authenticity_token: true, data: { type: :json } ,defaults: {input_html: {class: 'form-control input-sm'}}do |f|
+  .modal-body
+    .row
+      .col-md-4
+        = f.input :title, label: 'Name', class: 'form-control'
+      .col-md-4
+        = f.input :description, label: 'Description', class: 'form-control'
+      .col-md-4
+        label Type
+        = f.select :status, options_for_select(TODO_TYPES), {}, id: "status", class: "form-control input-sm"
+    br
+    .row
+      .col-md-6
+        label Status
+        = f.select :status, options_for_select(TODO_STATUS), {}, id: "status", class: "form-control input-sm"
+      .col-md-2
+        = f.submit :save, class: 'btn btn-success'
+      .col-md-2
+        = f.submit :cancel, class: 'btn btn-dark', "data-dismiss"=> "modal"

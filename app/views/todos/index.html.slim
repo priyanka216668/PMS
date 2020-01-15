@@ -1,0 +1,30 @@
+section.panel
+  header.panel-heading style="height:50px;"
+    .row
+      .col-md-2
+        p.pull-left TODOS
+    table.table
+      thead
+        tr
+          th scope="col"  Sr No.
+          th scope="col"  Title
+          th scope="col"  Type
+          th scope="col"  Status
+          th
+      tbody
+        - @todos.each_with_index do |todo, index|
+          tr
+            td
+              = index +1
+            td
+              = todo['title']
+            td
+              = todo['type']
+            td
+              = todo['status']
+            td
+              - unless is_admin?
+                button type="button" class="btn btn-sm btn-primary" id="create_project" style="margin-left: 2%; margin-bottom: 2%" onclick= "edit_project_todo(#{todo['project_id']}, #{todo['id']})" Edit
+
+#todo_modal.modal.fade aria-hidden="true" role="dialog"
+  .modal-content
