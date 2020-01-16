@@ -26,5 +26,6 @@ section.panel
               - unless is_admin?
                 button type="button" class="btn btn-sm btn-primary" id="create_project" style="margin-left: 2%; margin-bottom: 2%" onclick= "edit_project_todo(#{todo['project_id']}, #{todo['id']})" Edit
 
-#todo_modal.modal.fade aria-hidden="true" role="dialog"
-  .modal-content
+#todo_modal.modal role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content

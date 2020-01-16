@@ -1,5 +1,7 @@
 .modal-header
-  legend Todo
+  h4 Todo
+  button.close aria-label="Close" data-dismiss="modal" type="button"
+    span aria-hidden="true"  &times;
 = simple_form_for @todo,  url: project_todos_path , html:{class: 'form', multipart: true, id: 'create_todo_form'}, remote: true, method: :post, authenticity_token: true, data: { type: :json } ,defaults: {input_html: {class: 'form-control input-sm'}}do |f|
   .modal-body
     .row
@@ -18,12 +20,11 @@
       .col-md-6
         label Assigned To
         = f.select :assigned_to_id, options_for_select(User.where(role: 'developer').collect { |v| [v.name.humanize.titleize, v.id.to_s]}), {}, id: "assigned_to_id", class: "form-control input-sm"
-    br
-    .row
-      .col-md-2
-        = f.submit :save, class: 'btn btn-success'
-      .col-md-2
-        = f.submit :cancel, class: 'btn btn-dark', "data-dismiss"=> "modal"
+  .modal-footer
+    .col-md-2
+      = f.submit :save, class: 'btn btn-success'
+    .col-md-2
+      button.btn.btn-secondary data-dismiss="modal" type="button"   Close
 
 
 

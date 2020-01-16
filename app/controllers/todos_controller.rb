@@ -5,7 +5,6 @@ class TodosController < ApplicationController
   def index
     if current_user.present?
       @todos = current_user.assigned_todos.where(project_id: @project.id).all.as_json
-      byebug
     else
       redirect_to new_user_session_path
     end

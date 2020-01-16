@@ -1,4 +1,7 @@
 .modal-header
+  h4 New Project
+  button.close aria-label="Close" data-dismiss="modal" type="button"
+    span aria-hidden="true"  &times;
 = simple_nested_form_for @project,  url: projects_path , html:{class: 'form', multipart: true, id: 'create_project_form'}, remote: true, method: :post, authenticity_token: true, data: { type: :json } ,defaults: {input_html: {class: 'form-control input-sm'}}do |f|
   .modal-body
     .row
@@ -13,11 +16,11 @@
           .col-md-4
             = r.link_to_remove "X" , class: 'btn pull-right'
       = f.link_to_add "Add Devlopers", :resources, style: "margin-left: 10px;"
-    .row
-      .col-md-3
-        = f.submit :save, class: 'btn btn-success'
-      .col-md-3
-        = f.submit :cancel, class: 'btn btn-dark', "data-dismiss"=> "modal"
+  .modal-footer
+    .col-md-2
+      = f.submit :save, class: 'btn btn-success'
+    .col-md-2
+      = f.submit :cancel, class: 'btn btn-dark', "data-dismiss"=> "modal"
 
 
 
